@@ -96,21 +96,21 @@ export const LogoutButton = styled.button`
 `;
 
 export const LogoutPopContainer = styled.div`
-  padding: 5px 40px 30px 40px;
+  padding: 5px 0 30px 0;
   height: 100%;
-  width: 100%;
   border-radius: 10px;
 `;
 
 export const Question = styled.p`
   font-size: 18px;
   margin-top: 30px;
+  text-align: center;
 `;
 
 export const BtnFlexContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
@@ -123,6 +123,7 @@ export const CancelBtn = styled.button`
   font-weight: 600;
   height: 30px;
   width: 100px;
+  margin-right: 15px;
 `;
 
 export const ModalLogoutBtn = styled.button`

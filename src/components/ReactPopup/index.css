@@ -1,11 +1,32 @@
 .logout-content {
-    width: 90vw;
-    border-radius: 10px;
-  }
-  .light-mode-content {
-    background-color: white;
-  }
-  .dark-mode-content {
-    background-color: #3a3a3a;
-    color: white;
-  }
+  border-radius: 10px;
+  width: 38%;
+}
+.light-mode-content {
+  background-color: white;
+}
+.dark-mode-content {
+  background-color: #3a3a3a;
+  color: white;
+}
+
+@media (max-width: 400px){
+    .logout-content {
+        width: 80%;
+    }
+}
+@media (min-width:400px) and (max-width: 575px) {
+    .logout-content {
+        width: 70%;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .logout-content {
+        width: 55%;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .logout-content {
+        width: 40%;
+    }
+}

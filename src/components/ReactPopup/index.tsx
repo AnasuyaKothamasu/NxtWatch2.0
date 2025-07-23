@@ -19,7 +19,7 @@ const ReactPopup = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  function handleLogout() {
+  function handleLogout(close:() => void) {
     close();
     navigate("/login", { replace: true });
     Cookies.remove("jwt_token");
@@ -51,7 +51,7 @@ const ReactPopup = () => {
                   <CancelBtn type="button" onClick={() => close()}>
                     Cancel
                   </CancelBtn>
-                  <ModalLogoutBtn type="button" onClick={() => handleLogout()}>
+                  <ModalLogoutBtn type="button" onClick={() => handleLogout(close)}>
                     Logout
                   </ModalLogoutBtn>
                 </BtnFlexContainer>
