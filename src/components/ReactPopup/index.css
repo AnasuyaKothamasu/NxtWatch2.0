@@ -1,0 +1,11 @@
+.logout-content {
+    width: 90vw;
+    border-radius: 10px;
+  }
+  .light-mode-content {
+    background-color: white;
+  }
+  .dark-mode-content {
+    background-color: #3a3a3a;
+    color: white;
+  }
