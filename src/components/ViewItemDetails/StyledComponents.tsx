@@ -10,12 +10,12 @@ export const VideoItemFlexContainer = styled.div`
 `;
 
 export const ItemDetailsContainer = styled.div`
-  min-width: calc(100% - 20vw);
+  min-width: calc(100vw - 25vw);
   margin-left: 20vw;
   margin-top: 80px;
   min-height: calc(100vh - 80px);
   font-family: sans-serif;
-  padding: 40px 100px;
+  padding: 40px 20px 40px 50px;
   background-color: ${(props) => props.theme.secondaryBgColor};
   @media (max-width: 575px) {
     width: 100%;
@@ -32,9 +32,9 @@ export const ItemDetailsContainer = styled.div`
 `;
 
 export const VideoIframe = styled.iframe`
-  width: 100%;
+  width: 95%;
   height: 65%;
-  aspect-ratio: 16/9;
+  /* aspect-ratio: 16/9; */
   @media (max-width: 1030px) {
     height: 55%;
   }
@@ -57,6 +57,7 @@ export const ChannelDetailsContainer = styled.div`
   align-items: center;
   margin-top: 0px 20px;
   padding: 10px;
+  width: 90%;
 `;
 
 export const ChannelProfileImage = styled.img`

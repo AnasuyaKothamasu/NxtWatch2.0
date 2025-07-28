@@ -14,12 +14,13 @@ import {
   Question,
 } from "./StyledComponents";
 import { useTheme } from "styled-components";
+import {AppTheme} from '../../App.tsx'
 
 const ReactPopup = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const theme = useTheme() as AppTheme
 
-  function handleLogout(close:() => void) {
+  function handleLogout(close: () => void) {
     close();
     navigate("/login", { replace: true });
     Cookies.remove("jwt_token");
@@ -51,7 +52,10 @@ const ReactPopup = () => {
                   <CancelBtn type="button" onClick={() => close()}>
                     Cancel
                   </CancelBtn>
-                  <ModalLogoutBtn type="button" onClick={() => handleLogout(close)}>
+                  <ModalLogoutBtn
+                    type="button"
+                    onClick={() => handleLogout(close)}
+                  >
                     Logout
                   </ModalLogoutBtn>
                 </BtnFlexContainer>

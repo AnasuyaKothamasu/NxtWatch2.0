@@ -9,16 +9,18 @@ import {
   VideoDescp,
 } from "./StyledComponents";
 
-interface VideoProps {
-    videoDetails: {
-        channelName: string;
+type details = {
+   channelName: string;
         channelProfile: string;
         id: string;
         publishedAt: string;
         thumbnailUrl: string;
         title: string;
         views: string;
-    }
+}
+
+interface VideoProps {
+    videoDetails: details
     handleClick: (id: string) => void
 }
 

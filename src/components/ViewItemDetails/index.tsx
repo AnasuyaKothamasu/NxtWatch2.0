@@ -25,20 +25,12 @@ import {
   ViewsAndPublished,
 } from "./StyledComponents";
 
-interface VideoDetails {
-  channelName: string;
-  channelProfile: string;
-  subscribers: string;
-  descp: string;
-  id: string;
-  thumbnail: string;
-  title: string;
-  publishedAt: string;
-  video: string;
-  views: string;
-}
+import itemStore from "./ItemStore";
+import { observer } from "mobx-react-lite";
 
-const ViewItemDetails: React.FC = () => {
+
+
+const ViewItemDetails: React.FC = observer(() => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error("ThemeContext must be used with a savedVideosProvider")
@@ -47,12 +39,7 @@ const ViewItemDetails: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [showSuccessView, setShowSuccessView] = useState<boolean>(true);
-  const [det, setDet] = useState<VideoDetails | null>(null);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isUnliked, setIsUnliked] = useState<boolean>(false);
-
-  const vid = savedVideos.some((video: VideoDetails) => video.id === id);
+  const vid = savedVideos.some((video: any) => video.id === id);
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const jwtToken = Cookies.get("jwt_token");
@@ -64,93 +51,62 @@ const ViewItemDetails: React.FC = () => {
   }, [jwtToken, navigate]);
 
   const handleLike = () => {
-    setIsLiked((prev) => {
-      const newLikeState = !prev;
-      if (newLikeState) setIsUnliked(false);
-      return newLikeState;
-    });
-  };
+  const newLike = !itemStore.isLiked;
+  itemStore.setIsLiked(newLike);
+  if (newLike) itemStore.setIsUnliked(false);
+};
 
-  const handleDislike = () => {
-    setIsUnliked((prev) => {
-      const newDislikeState = !prev;
-      if (newDislikeState) setIsLiked(false);
-      return newDislikeState;
-    });
-  };
+const handleDislike = () => {
+  const newDislike = !itemStore.isUnliked;
+  itemStore.setIsUnliked(newDislike);
+  if (newDislike) itemStore.setIsLiked(false);
+};
 
   function handleSave() {
-    if (!det) return;
+    if (!itemStore.det) return;
     setIsSaved((prev) => {
       const newSavedState = !prev;
       if (newSavedState) {
-        save(det);
+        save(itemStore.det);
       } else {
-        unsave(det);
+        unsave(itemStore.det);
       }
       return newSavedState;
     });
   }
 
   useEffect(() => {
-    async function fetchItem() {
-      if (!id) return;
-      const url = `https://apis.ccbp.in/videos/${id}`;
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      };
-      const response = await fetch(url, options);
-      if (response.ok) {
-        const data = await response.json();
-        const vd = data.video_details;
-        const formattedData: VideoDetails = {
-          channelName: vd.channel.name,
-          channelProfile: vd.channel.profile_image_url,
-          subscribers: vd.channel.subscriber_count,
-          descp: vd.description,
-          id: vd.id,
-          thumbnail: vd.thumbnail_url,
-          title: vd.title,
-          publishedAt: vd.published_at,
-          video: vd.video_url,
-          views: vd.view_count,
-        };
-        setDet(formattedData);
-        setShowSuccessView(true);
-      } else {
-        setShowSuccessView(false);
-      }
+    if (!id){
+      return
+    }else{
+      itemStore.fetchVideo(id)
     }
-    fetchItem();
   }, [id, savedVideos]);
 
   function successView() {
-    if (!det) return null;
+    if (!itemStore.det) return null;
 
     return (
       <ItemDetailsContainer>
         <VideoIframe
-          src={det.video?.replace("watch?v=", "embed/")}
+          src={itemStore.det.videoUrl?.replace("watch?v=", "embed/")}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
         <TextContainer>
-          <VideoItemTitle>{det.title}</VideoItemTitle>
+          <VideoItemTitle>{itemStore.det.title}</VideoItemTitle>
           <StatsContainer>
             <ViewsAndPublished>
-              {det.views} views • {det.publishedAt}
+              {itemStore.det.views} views • {itemStore.det.publishedAt}
             </ViewsAndPublished>
             <ActionButtonsContainer>
-              <LikeButtonDiv isActive={isLiked} onClick={handleLike}>
+              <LikeButtonDiv isActive={itemStore.isLiked} onClick={handleLike}>
                 <BiLike style={{ marginRight: "5px" }} />
                 <p>Like</p>
               </LikeButtonDiv>
-              <LikeButtonDiv isActive={isUnliked} onClick={handleDislike}>
+              <LikeButtonDiv isActive={itemStore.isUnliked} onClick={handleDislike}>
                 <BiDislike style={{ marginRight: "5px" }} />
                 <p>Dislike</p>
               </LikeButtonDiv>
@@ -162,11 +118,11 @@ const ViewItemDetails: React.FC = () => {
           </StatsContainer>
           <DividerLine />
           <ChannelDetailsContainer>
-            <ChannelProfileImage src={det.channelProfile} />
+            <ChannelProfileImage src={itemStore.det.channelProfile} />
             <ChannelTextContainer>
-              <ChannelName>{det.channelName}</ChannelName>
-              <SubscribersText>{det.subscribers} subscribers</SubscribersText>
-              <DescriptionText>{det.descp}</DescriptionText>
+              <ChannelName>{itemStore.det.channelName}</ChannelName>
+              <SubscribersText>{itemStore.det.subscriberCount} subscribers</SubscribersText>
+              <DescriptionText>{itemStore.det.description}</DescriptionText>
             </ChannelTextContainer>
           </ChannelDetailsContainer>
         </TextContainer>
@@ -177,9 +133,9 @@ const ViewItemDetails: React.FC = () => {
   return (
     <VideoItemFlexContainer>
       <Sidebar />
-      {showSuccessView ? successView() : <FailureView />}
+      {itemStore.showSuccessView ? successView() : <FailureView />}
     </VideoItemFlexContainer>
   );
-};
+});
 
 export default ViewItemDetails;

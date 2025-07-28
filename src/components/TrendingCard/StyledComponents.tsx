@@ -17,8 +17,8 @@ export const TrendingCardd = styled.div`
 `;
 
 export const TrendCardThumbnail = styled.img`
-  height: 208px;
-  min-width: 50%;
+  height: 280px;
+  min-width: 40%;
   @media (max-width: 575px) {
     width: 100%;
   }

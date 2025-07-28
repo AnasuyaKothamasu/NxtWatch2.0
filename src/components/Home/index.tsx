@@ -7,7 +7,10 @@ import { FaSearch } from "react-icons/fa";
 import Sidebar from "../Sidebar";
 import PremiumCard from "../PremiumCard";
 import FailureView from "../FailureView";
+import homeStore from "./HomeStore";
+import { observer } from "mobx-react-lite";
 import {
+
   HomeSuccessContainer,
   HomeContainer1,
   SearchInputContainer,
@@ -23,67 +26,21 @@ import {
   Flex,
 } from "./StyledComponents";
 
-interface VideoItem {
-  channelName: string;
-  channelProfile: string;
-  id: string;
-  publishedAt: string;
-  thumbnailUrl: string;
-  title: string;
-  views: string;
-}
-
-const Home: React.FunctionComponent = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [videosList, setVideosList] = useState<VideoItem[]>([]);
-  const [showPremiumCard, setShowPremiumCard] = useState<boolean>(true);
-  const [searchInput, setSearchInput] = useState<string>("");
-  const [showSuccessView, setShowSuccessView] = useState<boolean>(true);
-  const [filteredList, setFilteredList] = useState<VideoItem[]>([]);
-
+const Home: React.FunctionComponent = observer(() => {
   const navigate = useNavigate();
   const jwtToken = Cookies.get("jwt_token");
-  if (jwtToken === undefined) {
-    navigate("/login", { replace: true });
-  }
-  const url = "https://apis.ccbp.in/videos/all?search=";
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-    },
-  };
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(url, options);
-      if (response.ok === true) {
-        const data = await response.json();
-        const formattedData = data.videos.map((each) => ({
-          channelName: each.channel.name,
-          channelProfile: each.channel.profile_image_url,
-          id: each.id,
-          publishedAt: each.published_at,
-          thumbnailUrl: each.thumbnail_url,
-          title: each.title,
-          views: each.view_count,
-        }));
-        setIsLoading(false);
-        setVideosList(formattedData);
-        setFilteredList(formattedData);
-        setShowSuccessView(true);
-      } else {
-        setShowSuccessView(false);
-      }
+    if (jwtToken === undefined) {
+      navigate("/login", { replace: true });
+    } else {
+      homeStore.fetchVideos();
     }
-    fetchData();
   }, []);
 
   function handleSearch(event: React.FormEvent) {
     event.preventDefault();
-    const updated = videosList.filter((each) =>
-      each.title.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    setFilteredList(updated);
+    homeStore.filterVideos();
   }
 
   function novideosView() {
@@ -104,7 +61,7 @@ const Home: React.FunctionComponent = () => {
   function videosView() {
     return (
       <HomeGridContainer>
-        {filteredList.map((each) => (
+        {homeStore.filteredList.map((each) => (
           <VideoCard
             key={each.id}
             videoDetails={each}
@@ -118,25 +75,27 @@ const Home: React.FunctionComponent = () => {
   function successView() {
     return (
       <HomeSuccessContainer>
-        {showPremiumCard && <PremiumCard removeCard={removeCard} />}
+        {homeStore.showPremiumCard && (
+          <PremiumCard removeCard={homeStore.removeCard} />
+        )}
         <HomeContainer1>
           <SearchInputContainer onSubmit={handleSearch}>
             <SearchInput
               type="search"
               placeholder="Search"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              value={homeStore.searchInput}
+              onChange={(e) => homeStore.setSearchInput(e.target.value)}
             />
             <SearchButton type="submit">
               <FaSearch className="search-icon" />
             </SearchButton>
           </SearchInputContainer>
-          {isLoading ? (
+          {homeStore.isLoading ? (
             <Loader>
               {" "}
               <BeatLoader />{" "}
             </Loader>
-          ) : filteredList.length === 0 ? (
+          ) : homeStore.filteredList.length === 0 ? (
             novideosView()
           ) : (
             videosView()
@@ -144,10 +103,6 @@ const Home: React.FunctionComponent = () => {
         </HomeContainer1>
       </HomeSuccessContainer>
     );
-  }
-
-  function removeCard() {
-    setShowPremiumCard(false);
   }
 
   function handleClick(id: string) {
@@ -158,10 +113,10 @@ const Home: React.FunctionComponent = () => {
     <>
       <Flex>
         <Sidebar />
-        {showSuccessView ? successView() : <FailureView />}
+        {homeStore.showSuccessView ? successView() : <FailureView />}
       </Flex>
     </>
   );
-};
+});
 
 export default Home;

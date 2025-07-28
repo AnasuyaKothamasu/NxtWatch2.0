@@ -1,34 +1,22 @@
 import { createContext, useState } from "react";
-
-interface VideoDetails {
-  id: string;
-  title: string;
-  channelName: string;
-  channelProfile: string;
-  subscribers: string;
-  descp: string;
-  thumbnail: string;
-  publishedAt: string;
-  video: string;
-  views: string;
-}
+import { VideoItem } from "../components/ViewItemDetails/ItemStore";
 
 type SavedVideosContextType = [
-  VideoDetails[],
-  (video: VideoDetails) => void,
-  (video: VideoDetails) => void
+  VideoItem[],
+  (video: VideoItem) => void,
+  (video: VideoItem) => void
 ];
 
 const ThemeContext = createContext <SavedVideosContextType | undefined>(undefined);
 const SavedVideosProvider = ({ children }) => {
-  const [savedVideos, setSavedVideos] = useState<VideoDetails[]>([]);
+  const [savedVideos, setSavedVideos] = useState<VideoItem[]>([]);
 
-  const save = (data: VideoDetails) => {
+  const save = (data: VideoItem ) => {
     const updated = [...savedVideos, data];
     setSavedVideos(updated);
   };
 
-  const unsave = (data: VideoDetails) => {
+  const unsave = (data: VideoItem) => {
     const updated = savedVideos.filter((each) => each.id !== data.id);
     setSavedVideos(updated);
   };
@@ -40,4 +28,4 @@ const SavedVideosProvider = ({ children }) => {
   );
 };
 
-export { ThemeContext, SavedVideosProvider, type VideoDetails };
+export { ThemeContext, SavedVideosProvider, type VideoItem };

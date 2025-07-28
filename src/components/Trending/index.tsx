@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 import FailureView from "../FailureView";
 import TrendingCard from "../TrendingCard";
+import trendStore from "./TrendingStore";
 
 import {
   TrendingFlexContainer,
@@ -16,62 +17,23 @@ import {
   Loader,
   TrendingVideosContainer,
 } from "./StyledComponents";
+import { observer } from "mobx-react-lite";
 
-interface TrendVideo {
-  channelName: string;
-  channelProfile: string;
-  id: string;
-  publishedAt: string;
-  thumbnail: string;
-  title: string;
-  views: string;
-}
-
-const Trending: React.FunctionComponent = () => {
+const Trending: React.FunctionComponent = observer(() => {
   const navigate = useNavigate();
-  const [showSuccessView, setShowSuccessView] = useState<boolean>(true);
-  const [trendingVideos, setTrendingVideos] = useState<TrendVideo[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const jwtToken = Cookies.get("jwt_token");
-  if (jwtToken === undefined) {
-    navigate("/login", { replace: true });
-  }
 
   function clickTrendVideo(id) {
     navigate(`/viewItemDetails/${id}`);
   }
 
   useEffect(() => {
-    async function fetchTrending() {
-      setIsLoading(true);
-      const url = "https://apis.ccbp.in/videos/trending";
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      };
-      const response = await fetch(url, options);
-      if (response.ok === true) {
-        const data = await response.json();
-        let formattedData = data.videos.map((each) => ({
-          channelName: each.channel.name,
-          channelProfile: each.channel.profile_image_url,
-          id: each.id,
-          publishedAt: each.published_at,
-          thumbnail: each.thumbnail_url,
-          title: each.title,
-          views: each.view_count,
-        }));
-        setIsLoading(false);
-        setTrendingVideos(formattedData);
-        setShowSuccessView(true);
-      } else {
-        setShowSuccessView(false);
-      }
+    if (jwtToken === undefined) {
+      navigate("/login", { replace: true });
+    } else {
+      trendStore.fetchVideos();
     }
-    fetchTrending();
   }, []);
 
   function successView() {
@@ -84,13 +46,13 @@ const Trending: React.FunctionComponent = () => {
           <Heading>Trending</Heading>
         </HeadingContainer>
         <TrendingVideosContainer>
-          {isLoading && (
+          {trendStore.isLoading && (
             <Loader>
               {" "}
               <BeatLoader />{" "}
             </Loader>
           )}
-          {trendingVideos.map((each) => (
+          {trendStore.trendingVideos.map((each) => (
             <TrendingCard
               trendDetails={each}
               clickTrendVideo={clickTrendVideo}
@@ -106,10 +68,10 @@ const Trending: React.FunctionComponent = () => {
     <>
       <TrendingFlexContainer className="flex-container-trending">
         <Sidebar />
-        {showSuccessView ? successView() : <FailureView />}
+        {trendStore.showSuccessView ? successView() : <FailureView />}
       </TrendingFlexContainer>
     </>
   );
-};
+});
 
 export default Trending;

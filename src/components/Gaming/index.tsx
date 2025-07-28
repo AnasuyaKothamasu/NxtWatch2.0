@@ -16,56 +16,23 @@ import {
   GamingVideosContainer,
   GamingGridContainer,
 } from "./StyledComponents";
+import gameStore from "./GamingStore";
+import { observer } from "mobx-react-lite";
 
-interface GameVideo {
-    id: string;
-    thumbnail: string;
-    title: string;
-    views: string;
-}
-
-const Gaming: React.FunctionComponent = () => {
+const Gaming: React.FunctionComponent = observer(() => {
   const navigate = useNavigate();
-  const [showSuccessView, setShowSuccessView] = useState<boolean>(true);
-  const [gamingVideos, setGamingVideos] = useState<GameVideo[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const jwtToken = Cookies.get("jwt_token");
-  if (jwtToken === undefined) {
-    navigate("/login", { replace: true });
-  }
 
-  function clickGameVideo(id: string):void {
+  function clickGameVideo(id: string): void {
     navigate(`/viewItemDetails/${id}`);
   }
 
   useEffect(() => {
-    async function fetchGaming() {
-      setIsLoading(true);
-      const url = "https://apis.ccbp.in/videos/gaming";
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      };
-      const response = await fetch(url, options);
-      if (response.ok === true) {
-        const data = await response.json();
-        let formattedData = data.videos.map((each) => ({
-          id: each.id,
-          thumbnail: each.thumbnail_url,
-          title: each.title,
-          views: each.view_count,
-        }));
-        setIsLoading(false);
-        setGamingVideos(formattedData);
-        setShowSuccessView(true);
-      } else {
-        setShowSuccessView(false);
-      }
+    if (jwtToken === undefined) {
+      navigate("/login", { replace: true });
+    } else {
+      gameStore.fetchVideos();
     }
-    fetchGaming();
   }, []);
 
   function successView() {
@@ -78,13 +45,13 @@ const Gaming: React.FunctionComponent = () => {
           <Heading>Gaming</Heading>
         </HeadingContainer>
         <GamingVideosContainer>
-          {isLoading && (
+          {gameStore.isLoading && (
             <Loader>
               <BeatLoader />
             </Loader>
           )}
           <GamingGridContainer>
-            {gamingVideos.map((each) => (
+            {gameStore.gamingVideos.map((each) => (
               <GamingCard
                 gameDetails={each}
                 clickGameVideo={clickGameVideo}
@@ -101,10 +68,10 @@ const Gaming: React.FunctionComponent = () => {
     <>
       <GamingFlexContainer>
         <Sidebar />
-        {showSuccessView ? successView() : <FailureView />}
+        {gameStore.showSuccessView ? successView() : <FailureView />}
       </GamingFlexContainer>
     </>
   );
-};
+});
 
 export default Gaming;

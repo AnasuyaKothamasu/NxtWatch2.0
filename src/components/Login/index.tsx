@@ -15,18 +15,14 @@ import {
   FormLogo,
   ErrorMsg
 } from "./StyledComponents";
+import loginStore from "./LoginStore";
 
 import { AppTheme } from "../../App";
+import { observer } from "mobx-react-lite";
 
-const Login: React.FunctionComponent = () => {
+const Login: React.FunctionComponent = observer(() => {
   const navigate = useNavigate();
   const theme = useTheme() as AppTheme;
-
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [showPass, setShowPass] = useState<boolean>(false);
-  const [showError, setShowError] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const handleSuccess = (jwtToken: string) => {
     Cookies.set("jwt_token", jwtToken, { expires: 30 });
@@ -34,13 +30,13 @@ const Login: React.FunctionComponent = () => {
   };
 
   const handleFailure = (error: string) => {
-    setShowError(true);
-    setErrorMsg(error);
+    loginStore.setShowError(true);
+    loginStore.setErrorMsg(error);
   };
 
   const handleLoginSubmit = async (e : React.FormEvent) => {
     e.preventDefault();
-    const userDetails = { username, password };
+    const userDetails = loginStore.userDetails;
     const url = "https://apis.ccbp.in/login";
     const options = {
       method: "POST",
@@ -65,36 +61,36 @@ const Login: React.FunctionComponent = () => {
             <Input
               type="text"
               id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={loginStore.username}
+              onChange={(e) => loginStore.setUsername(e.target.value)}
               placeholder="Username"
             />
             <Label htmlFor="password">PASSWORD</Label>
             <Input
               id="password"
-              type={showPass ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type={loginStore.showPass ? "text" : "password"}
+              value={loginStore.password}
+              onChange={(e) => loginStore.setPassword(e.target.value)}
               placeholder="Password"
             />
             <CheckBoxContainer className="check-div">
               <CheckBox
                 type="checkbox"
                 id="checkbox"
-                checked={showPass}
-                onChange={() => setShowPass((prev) => !prev)}
+                checked={loginStore.showPass}
+                onChange={() => loginStore.setShowPass(loginStore.showPass ? false : true)}
               />
               <CheckBoxLabel htmlFor="checkbox">Show Password</CheckBoxLabel>
             </CheckBoxContainer>
             <LoginButton type="submit" className="login-btn">
               Login
             </LoginButton>
-            {showError && <ErrorMsg className="errorMsg">{errorMsg}</ErrorMsg>}
+            {loginStore.showError && <ErrorMsg className="errorMsg">{loginStore.errorMsg}</ErrorMsg>}
           </FormContainer>
         </LoginInnerContainer>
       </LoginContainer>
     </>
   );
-};
+});
 
 export default Login;
