@@ -1,8 +1,10 @@
 import { useLocation, useNavigate } from "react-router";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { SiYoutubegaming } from "react-icons/si";
 import { TiHome } from "react-icons/ti";
 import { ImFire } from "react-icons/im";
-import { SiYoutubegaming } from "react-icons/si";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { ReactNode } from "react";
+
 import {
   SideBarContainer,
   SideBarInnerDiv,
@@ -10,58 +12,59 @@ import {
   SidebarTxt,
   SidebarFooter,
   Contact,
-  SidebarDescp,
+  SidebarDescription,
   SocialIcon,
   SocialContainer,
 } from "./StyledComponents";
 
-interface ActiveProp {
-    active: boolean;
-}
+import ROUTES from "../../routes/route";
 
-const Sidebar: React.FunctionComponent = () => {
+const Sidebar: React.FunctionComponent = ():ReactNode => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const isActive = (path: string) => {
     return path === location.pathname;
-  }
+  };
 
   return (
     <SideBarContainer>
       <div style={{ marginTop: "30px" }}>
-        <SideBarInnerDiv onClick={() => navigate("/")} active={isActive("/")}>
-          <Icon active={isActive("/")}>
+        <SideBarInnerDiv
+          onClick={() => navigate(ROUTES.HOME)}
+          active={isActive(ROUTES.HOME)}
+        >
+          <Icon active={isActive(ROUTES.HOME)}>
             <TiHome />
           </Icon>
-          <SidebarTxt active={isActive("/")}>Home</SidebarTxt>
+          <SidebarTxt active={isActive(ROUTES.HOME)}>Home</SidebarTxt>
         </SideBarInnerDiv>
         <SideBarInnerDiv
-          onClick={() => navigate("/trending")}
-          active={isActive("/trending")}
+          onClick={() => navigate(ROUTES.TRENDING)}
+          active={isActive(ROUTES.TRENDING)}
         >
-          <Icon active={isActive("/trending")}>
+          <Icon active={isActive(ROUTES.TRENDING)}>
             <ImFire />
           </Icon>
-          <SidebarTxt active={isActive("/trending")}>Trending</SidebarTxt>
+          <SidebarTxt active={isActive(ROUTES.TRENDING)}>Trending</SidebarTxt>
         </SideBarInnerDiv>
         <SideBarInnerDiv
-          onClick={() => navigate("/gaming")}
-          active={isActive("/gaming")}
+          onClick={() => navigate(ROUTES.GAMING)}
+          active={isActive(ROUTES.GAMING)}
         >
-          <Icon active={isActive("/gaming")}>
+          <Icon active={isActive(ROUTES.GAMING)}>
             <SiYoutubegaming />
           </Icon>
-          <SidebarTxt active={isActive("/gaming")}>Gaming</SidebarTxt>
+          <SidebarTxt active={isActive(ROUTES.GAMING)}>Gaming</SidebarTxt>
         </SideBarInnerDiv>
         <SideBarInnerDiv
-          onClick={() => navigate("/savedVideos")}
-          active={isActive("/savedVideos")}
+          onClick={() => navigate(ROUTES.SAVED)}
+          active={isActive(ROUTES.SAVED)}
         >
-          <Icon active={isActive("/savedVideos")}>
+          <Icon active={isActive(ROUTES.SAVED)}>
             <MdOutlinePlaylistAdd />
           </Icon>
-          <SidebarTxt active={isActive("/savedVideos")}>Saved Videos</SidebarTxt>
+          <SidebarTxt active={isActive(ROUTES.SAVED)}>Saved Videos</SidebarTxt>
         </SideBarInnerDiv>
       </div>
       <SidebarFooter>
@@ -71,9 +74,9 @@ const Sidebar: React.FunctionComponent = () => {
           <SocialIcon src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png" />
           <SocialIcon src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png" />
         </SocialContainer>
-        <SidebarDescp>
+        <SidebarDescription>
           Enjoy! Now to see your channels and recommendations!
-        </SidebarDescp>
+        </SidebarDescription>
       </SidebarFooter>
     </SideBarContainer>
   );

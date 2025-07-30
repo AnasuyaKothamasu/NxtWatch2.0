@@ -1,17 +1,22 @@
 import styled from "styled-components";
 
-export const FailureViewContainer = styled.div`
+export const NotFoundFlexContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  min-width: calc(100vw - 20vw);
+  flex-direction: row;
+  font-family: sans-serif;
+`;
+
+export const NotFoundContainer = styled.div`
+  background-color: ${(props) => props.theme.secondaryBgColor};
+  min-width: calc(100% - 20vw);
   margin-left: 20vw;
-  justify-content: center;
-  align-items: center;
+  margin-top: 80px;
   height: calc(100vh - 80px);
   margin-top: 80px;
-  font-family: sans-serif;
-  text-align: center;
-  background-color: ${(props) => props.theme.secondaryBgColor};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   @media (max-width: 575px) {
     height: calc(100vh - 65px);
     margin-top: 65px;
@@ -25,9 +30,9 @@ export const FailureViewContainer = styled.div`
     width: 100%;
   }
 `;
-export const FailureImage = styled.img`
-  height: 350px;
-  width: 400px;
+
+export const NotFoundImage = styled.img`
+  height: 500px;
   @media (max-width: 575px) {
     height: 200px;
     width: 225px;
@@ -36,28 +41,29 @@ export const FailureImage = styled.img`
     height: 300px;
     width: 325px;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1030px) {
     height: 300px;
     width: 350px;
   }
 `;
 
-export const FailureHeading = styled.h2`
-  color: ${(props) => props.theme.txtColor};
-  @media (max-width: 575px) {
-    font-size: 20px;
-  }
-  @media (min-width: 576px) and (max-width: 767px) {
-    font-size: 20px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 20px;
-  }
-`;
-
-export const FailureDescription = styled.p`
+export const NotFoundHeading = styled.h1`
   color: ${(props) => props.theme.descriptionColor};
-  font-size: 18px;
+  @media (max-width: 575px) {
+    font-size: 20px;
+  }
+  @media (min-width: 576px) and (max-width: 767px) {
+    font-size: 20px;
+  }
+  @media (min-width: 768px) and (max-width: 1030px) {
+    font-size: 20px;
+  }
+`;
+
+export const NotFoundDescription = styled.p`
+  font-size: large;
+  font-weight: 500;
+  color: ${(props) => props.theme.descriptionColor};
   @media (max-width: 575px) {
     margin-top: 0;
     font-size: 16px;
@@ -66,19 +72,8 @@ export const FailureDescription = styled.p`
     margin-top: 0;
     font-size: 16px;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1030px) {
     margin-top: 0;
     font-size: 16px;
   }
-`;
-
-export const FailureButton = styled.button`
-  height: 35px;
-  width: 100px;
-  background-color: #4a47e0;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
 `;

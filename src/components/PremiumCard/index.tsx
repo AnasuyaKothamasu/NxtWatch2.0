@@ -1,4 +1,6 @@
 import { RxCross2 } from "react-icons/rx";
+import { ReactNode } from "react";
+
 import {
   PremiumCardContainer,
   PremiumFlexContainer,
@@ -8,17 +10,14 @@ import {
   GetButton,
 } from "./StyledComponents";
 
-interface CardProps {
-    removeCard: () => void;
-}
+import homeStore from "../../pages/Home/stores/homeStore";
 
-const PremiumCard: React.FunctionComponent<CardProps> = ({removeCard}) => {
-
+const PremiumCard: React.FunctionComponent = ():ReactNode => {
   return (
     <PremiumCardContainer>
       <PremiumFlexContainer>
         <PremiumLogo src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
-        <RemoveButtonContainer onClick={() => removeCard()}>
+        <RemoveButtonContainer onClick={() => homeStore.removeCard()}>
           <RxCross2 className="cross-mark" />
         </RemoveButtonContainer>
       </PremiumFlexContainer>

@@ -1,30 +1,32 @@
-  import {
-    GamingCardd,
-    GamingCardTitle,
-    GamingCardThumbnail,
-    GamingCardViews,
-  } from "./StyledComponents";
+import { ReactNode } from "react";
 
-  interface GamingCardProps {
-    gameDetails: {
-        title: string;
-        id: string;
-        thumbnail: string;
-        views: string;
-    }
-    clickGameVideo: (id: string) => void;
-  }
+import {
+  GamingCardComponent,
+  GamingCardTitle,
+  GamingCardThumbnail,
+  GamingCardViews,
+} from "./StyledComponents";
 
-  const GamingCard: React.FunctionComponent<GamingCardProps> = ({gameDetails, clickGameVideo}) => {
-    const { title, id, thumbnail, views } = gameDetails;
+import { gameDetails } from "../../types/types";
 
-    return (
-      <GamingCardd onClick={() => clickGameVideo(id)}>
-        <GamingCardThumbnail src={thumbnail} />
-        <GamingCardTitle>{title}</GamingCardTitle>
-        <GamingCardViews>{views} Watching Worldwide</GamingCardViews>
-      </GamingCardd>
-    );
-  };
+interface GamingCardProps {
+  gameDetails: gameDetails;
+  clickGameVideo: (id: string) => void;
+}
 
-  export default GamingCard;
+const GamingCard: React.FunctionComponent<GamingCardProps> = ({
+  gameDetails,
+  clickGameVideo,
+}): ReactNode => {
+  const { title, id, thumbnail, views } = gameDetails;
+
+  return (
+    <GamingCardComponent onClick={() => clickGameVideo(id)}>
+      <GamingCardThumbnail src={thumbnail} />
+      <GamingCardTitle>{title}</GamingCardTitle>
+      <GamingCardViews>{views} Watching Worldwide</GamingCardViews>
+    </GamingCardComponent>
+  );
+};
+
+export default GamingCard;

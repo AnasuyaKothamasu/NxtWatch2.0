@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 import {
-  TrendingCardd,
+  TrendingCardComponent,
   TrendCardThumbnail,
   TrendingTextContainer,
   TxtDivTrend,
@@ -8,20 +10,17 @@ import {
   TrendingChannelName,
 } from "./StyledComponents";
 
+import { trendDetails } from "../../types/types";
+
 interface TrendVideoProps {
-    trendDetails: {
-        id: string;
-        channelName: string;
-        channelProfile: string;
-        publishedAt: string;
-        title: string;
-        views: string;
-        thumbnail: string;
-    }
-    clickTrendVideo: (id: string) => void;
+  trendDetails: trendDetails;
+  clickTrendVideo: (id: string) => void;
 }
 
-const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({ trendDetails, clickTrendVideo }) => {
+const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({
+  trendDetails,
+  clickTrendVideo,
+}):ReactNode => {
   const {
     id,
     channelName,
@@ -32,7 +31,7 @@ const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({ trendDetails, 
     thumbnail,
   } = trendDetails;
   return (
-    <TrendingCardd onClick={() => clickTrendVideo(id)}>
+    <TrendingCardComponent onClick={() => clickTrendVideo(id)}>
       <TrendCardThumbnail src={thumbnail} />
       <TrendingTextContainer>
         <TrendingChannelProfile src={channelProfile} />
@@ -44,7 +43,7 @@ const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({ trendDetails, 
           </TrendingChannelName>
         </TxtDivTrend>
       </TrendingTextContainer>
-    </TrendingCardd>
+    </TrendingCardComponent>
   );
 };
 

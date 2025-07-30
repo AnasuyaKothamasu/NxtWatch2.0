@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TrendingCardd = styled.div`
+export const TrendingCardComponent = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 50px;
@@ -78,6 +78,6 @@ export const TrendingCardTitle = styled.h2`
 `;
 
 export const TrendingChannelName = styled.p`
-  color: ${(props) => props.theme.descpColor};
+  color: ${(props) => props.theme.descriptionColor};
   font-weight: 600;
 `;

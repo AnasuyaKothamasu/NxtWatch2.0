@@ -1,14 +1,17 @@
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
 import { useNavigate, useLocation } from "react-router";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { SiYoutubegaming } from "react-icons/si";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useTheme } from "styled-components";
 import { RxCross2 } from "react-icons/rx";
 import { TiHome } from "react-icons/ti";
 import { ImFire } from "react-icons/im";
-import { SiYoutubegaming } from "react-icons/si";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
-import { useTheme } from "styled-components";
+import "reactjs-popup/dist/index.css";
+import Popup from "reactjs-popup";
+import { ReactNode } from "react";
+
 import "./index.css";
+
 import {
   CrossBtnPop,
   HamButton,
@@ -17,9 +20,10 @@ import {
   Icon,
   SidebarTxt,
 } from "./StyledComponents";
-import React from "react";
 
-const SidebarPopup: React.FC = () => {
+import ROUTES from "../../routes/route";
+
+const SidebarPopup: React.FC = ():ReactNode => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -51,27 +55,27 @@ const SidebarPopup: React.FC = () => {
                   <SidePopInnerDiv
                     onClick={() => {
                       close();
-                      navigate("/");
+                      navigate(ROUTES.HOME);
                     }}
-                    active={isActive("/")}
+                    active={isActive(ROUTES.HOME)}
                   >
-                    <Icon active={isActive("/")}>
+                    <Icon active={isActive(ROUTES.HOME)}>
                       <TiHome />
                     </Icon>
-                    <SidebarTxt active={isActive("/")}>Home</SidebarTxt>
+                    <SidebarTxt active={isActive(ROUTES.HOME)}>Home</SidebarTxt>
                   </SidePopInnerDiv>
 
                   <SidePopInnerDiv
                     onClick={() => {
                       close();
-                      navigate("/trending");
+                      navigate(ROUTES.TRENDING);
                     }}
-                    active={isActive("/trending")}
+                    active={isActive(ROUTES.TRENDING)}
                   >
-                    <Icon active={isActive("/trending")}>
+                    <Icon active={isActive(ROUTES.TRENDING)}>
                       <ImFire />
                     </Icon>
-                    <SidebarTxt active={isActive("/trending")}>
+                    <SidebarTxt active={isActive(ROUTES.TRENDING)}>
                       Trending
                     </SidebarTxt>
                   </SidePopInnerDiv>
@@ -79,27 +83,29 @@ const SidebarPopup: React.FC = () => {
                   <SidePopInnerDiv
                     onClick={() => {
                       close();
-                      navigate("/gaming");
+                      navigate(ROUTES.GAMING);
                     }}
-                    active={isActive("/gaming")}
+                    active={isActive(ROUTES.GAMING)}
                   >
-                    <Icon active={isActive("/gaming")}>
+                    <Icon active={isActive(ROUTES.GAMING)}>
                       <SiYoutubegaming />
                     </Icon>
-                    <SidebarTxt active={isActive("/gaming")}>Gaming</SidebarTxt>
+                    <SidebarTxt active={isActive(ROUTES.GAMING)}>
+                      Gaming
+                    </SidebarTxt>
                   </SidePopInnerDiv>
 
                   <SidePopInnerDiv
                     onClick={() => {
                       close();
-                      navigate("/savedVideos");
+                      navigate(ROUTES.SAVED);
                     }}
-                    active={isActive("/savedVideos")}
+                    active={isActive(ROUTES.SAVED)}
                   >
-                    <Icon active={isActive("/savedVideos")}>
+                    <Icon active={isActive(ROUTES.SAVED)}>
                       <MdOutlinePlaylistAdd />
                     </Icon>
-                    <SidebarTxt active={isActive("/savedVideos")}>
+                    <SidebarTxt active={isActive(ROUTES.SAVED)}>
                       Saved Videos
                     </SidebarTxt>
                   </SidePopInnerDiv>

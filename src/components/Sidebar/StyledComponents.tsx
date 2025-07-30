@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface ActiveProp {
-    active: boolean;
+  active: boolean;
 }
 
 export const SideBarContainer = styled.div`
@@ -68,7 +68,7 @@ export const Contact = styled.p`
   }
 `;
 
-export const SidebarDescp = styled.p`
+export const SidebarDescription = styled.p`
   font-weight: 500;
   margin-left: 15px;
   font-size: 16px;

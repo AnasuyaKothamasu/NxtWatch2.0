@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const GamingCardd = styled.div`
+export const GamingCardComponent = styled.div`
   background-color: transparent;
   width: 25vw;
   @media (max-width: 575px) {

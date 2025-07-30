@@ -60,7 +60,7 @@ export const VideoTitle = styled.h4`
   margin-top: 0;
   font-size: 17px;
   font-weight: 600;
-  color: ${(props) => props.theme.descpColor};
+  color: ${(props) => props.theme.descriptionColor};
   @media (min-width: 576px) and (max-width: 767px) {
     font-size: 16px;
   }
@@ -72,7 +72,7 @@ export const VideoTitle = styled.h4`
 export const VideoChannelName = styled.p`
   font-size: 14px;
   margin: 0 10px 0 0;
-  color: ${(props) => props.theme.descpColor};
+  color: ${(props) => props.theme.descriptionColor};
   @media (min-width: 576px) and (max-width: 767px) {
     font-size: 14px;
   }
@@ -81,9 +81,9 @@ export const VideoChannelName = styled.p`
   }
 `;
 
-export const VideoDescp = styled.p`
+export const VideoDescription = styled.p`
   font-size: 16px;
-  color: ${(props) => props.theme.descpColor};
+  color: ${(props) => props.theme.descriptionColor};
   @media (min-width: 576px) and (max-width: 767px) {
     font-size: 14px;
   }

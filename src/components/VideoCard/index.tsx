@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import {
   VideoCardContainer,
   VideoThumbnail,
@@ -6,25 +8,20 @@ import {
   TextContainerVideo,
   VideoTitle,
   VideoChannelName,
-  VideoDescp,
+  VideoDescription,
 } from "./StyledComponents";
 
-type details = {
-   channelName: string;
-        channelProfile: string;
-        id: string;
-        publishedAt: string;
-        thumbnailUrl: string;
-        title: string;
-        views: string;
-}
+import { details } from "../../types/types";
 
 interface VideoProps {
-    videoDetails: details
-    handleClick: (id: string) => void
+  videoDetails: details;
+  handleClick: (id: string) => void;
 }
 
-const VideoCard: React.FunctionComponent<VideoProps> = ({ videoDetails, handleClick }) => {
+const VideoCard: React.FunctionComponent<VideoProps> = ({
+  videoDetails,
+  handleClick,
+}):ReactNode => {
   const {
     channelName,
     channelProfile,
@@ -44,9 +41,9 @@ const VideoCard: React.FunctionComponent<VideoProps> = ({ videoDetails, handleCl
           <TextContainerVideo>
             <VideoTitle>{title}</VideoTitle>
             <VideoChannelName>{channelName}</VideoChannelName>
-            <VideoDescp>
+            <VideoDescription>
               {views} views • {publishedAt}
-            </VideoDescp>
+            </VideoDescription>
           </TextContainerVideo>
         </VideoCardFlexConatiner>
       </VideoCardContainer>

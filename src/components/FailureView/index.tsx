@@ -1,23 +1,27 @@
 import { useTheme } from "styled-components";
+import { ReactNode } from "react";
+
 import {
   FailureViewContainer,
   FailureImage,
   FailureHeading,
-  FailureDescp,
+  FailureDescription,
   FailureButton,
 } from "./StyledComponents";
-import { AppTheme } from "../../App";
 
-const FailureView: React.FunctionComponent = () => {
+import { AppTheme } from "../../types/types";
+
+const FailureView: React.FunctionComponent = (): ReactNode => {
   const theme = useTheme() as AppTheme;
+
   return (
     <FailureViewContainer>
-      <FailureImage src={theme.failureViewImg} alt="Failure view"/>
+      <FailureImage src={theme.failureViewImg} alt="Failure view" />
       <FailureHeading>Oops! Something Went Wrong</FailureHeading>
-      <FailureDescp>
+      <FailureDescription>
         We are having some trouble to complete your request. <br />
         Please Try Again.
-      </FailureDescp>
+      </FailureDescription>
       <FailureButton type="button" onClick={() => window.location.reload()}>
         Retry
       </FailureButton>
