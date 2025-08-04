@@ -1,5 +1,5 @@
 import { useTheme } from "styled-components";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   FailureViewContainer,
@@ -11,7 +11,7 @@ import {
 
 import { AppTheme } from "../../types/types";
 
-const FailureView: React.FunctionComponent = (): ReactNode => {
+const FailureView: React.FunctionComponent = (): ReactElement => {
   const theme = useTheme() as AppTheme;
 
   return (

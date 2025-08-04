@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   GamingCardComponent,
@@ -17,7 +17,7 @@ interface GamingCardProps {
 const GamingCard: React.FunctionComponent<GamingCardProps> = ({
   gameDetails,
   clickGameVideo,
-}): ReactNode => {
+}): ReactElement => {
   const { title, id, thumbnail, views } = gameDetails;
 
   return (

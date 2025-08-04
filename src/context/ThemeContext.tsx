@@ -1,23 +1,25 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactElement, useState } from "react";
 
-import VideoItemStore from "../pages/ViewItemDetails/stores/videoStore";
+import VideoItemModel from "../stores/models/VideoItemModel";
 
 type SavedVideosContextType = [
-  VideoItemStore[],
-  (video: VideoItemStore) => void,
-  (video: VideoItemStore) => void
+  VideoItemModel[],
+  (video: VideoItemModel) => void,
+  (video: VideoItemModel) => void
 ];
 
-const ThemeContext = createContext <SavedVideosContextType | undefined>(undefined);
-const SavedVideosProvider = ({ children }):ReactNode => {
-  const [savedVideos, setSavedVideos] = useState<VideoItemStore[]>([]);
+const ThemeContext = createContext<SavedVideosContextType | undefined>(
+  undefined
+);
+const SavedVideosProvider = ({ children }): ReactElement => {
+  const [savedVideos, setSavedVideos] = useState<VideoItemModel[]>([]);
 
-  const save = (data: VideoItemStore ) => {
+  const save = (data: VideoItemModel) => {
     const updated = [...savedVideos, data];
     setSavedVideos(updated);
   };
 
-  const unsave = (data: VideoItemStore) => {
+  const unsave = (data: VideoItemModel) => {
     const updated = savedVideos.filter((each) => each.id !== data.id);
     setSavedVideos(updated);
   };
@@ -29,4 +31,4 @@ const SavedVideosProvider = ({ children }):ReactNode => {
   );
 };
 
-export { ThemeContext, SavedVideosProvider, type VideoItemStore };
+export { ThemeContext, SavedVideosProvider, type VideoItemModel };

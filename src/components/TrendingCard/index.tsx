@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   TrendingCardComponent,
@@ -20,7 +20,7 @@ interface TrendVideoProps {
 const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({
   trendDetails,
   clickTrendVideo,
-}):ReactNode => {
+}): ReactElement => {
   const {
     id,
     channelName,

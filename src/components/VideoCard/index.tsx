@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   VideoCardContainer,
@@ -21,7 +21,7 @@ interface VideoProps {
 const VideoCard: React.FunctionComponent<VideoProps> = ({
   videoDetails,
   handleClick,
-}):ReactNode => {
+}): ReactElement => {
   const {
     channelName,
     channelProfile,

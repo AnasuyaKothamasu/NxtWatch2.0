@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { MdLogout } from "react-icons/md";
 import "reactjs-popup/dist/index.css";
 import Popup from "reactjs-popup";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 import Cookies from "js-cookie";
 import "./index.css";
 
@@ -18,9 +18,9 @@ import {
 } from "./StyledComponents";
 
 import { AppTheme } from "../../types/types";
-import ROUTES from "../../routes/route";
+import ROUTES from "../../constants/RouteConstants";
 
-const ReactPopup = (): ReactNode => {
+const ReactPopup = (): ReactElement => {
   const navigate = useNavigate();
   const theme = useTheme() as AppTheme;
 
@@ -65,7 +65,7 @@ const ReactPopup = (): ReactNode => {
                 </BtnFlexContainer>
               </LogoutPopContainer>
             </>
-          )) as unknown as React.ReactNode
+          )) as unknown as React.ReactElement
         }
       </Popup>
     </div>

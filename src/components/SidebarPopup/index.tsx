@@ -8,7 +8,7 @@ import { TiHome } from "react-icons/ti";
 import { ImFire } from "react-icons/im";
 import "reactjs-popup/dist/index.css";
 import Popup from "reactjs-popup";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import "./index.css";
 
@@ -21,9 +21,9 @@ import {
   SidebarTxt,
 } from "./StyledComponents";
 
-import ROUTES from "../../routes/route";
+import ROUTES from "../../constants/RouteConstants";
 
-const SidebarPopup: React.FC = ():ReactNode => {
+const SidebarPopup: React.FC = (): ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -112,7 +112,7 @@ const SidebarPopup: React.FC = ():ReactNode => {
                 </div>
               </SidePopContainer>
             </>
-          )) as unknown as React.ReactNode
+          )) as unknown as React.ReactElement
         }
       </Popup>
     </div>

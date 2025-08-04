@@ -3,7 +3,7 @@ import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { SiYoutubegaming } from "react-icons/si";
 import { TiHome } from "react-icons/ti";
 import { ImFire } from "react-icons/im";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   SideBarContainer,
@@ -17,9 +17,9 @@ import {
   SocialContainer,
 } from "./StyledComponents";
 
-import ROUTES from "../../routes/route";
+import ROUTES from "../../constants/RouteConstants";
 
-const Sidebar: React.FunctionComponent = ():ReactNode => {
+const Sidebar: React.FunctionComponent = (): ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
 

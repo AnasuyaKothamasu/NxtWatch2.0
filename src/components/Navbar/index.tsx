@@ -3,9 +3,9 @@ import { useTheme } from "styled-components";
 import { useNavigate } from "react-router";
 import { FaMoon } from "react-icons/fa";
 import "reactjs-popup/dist/index.css";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
-import ROUTES from "../../routes/route";
+import ROUTES from "../../constants/RouteConstants";
 
 import {
   FlexContainer,
@@ -29,7 +29,7 @@ interface NavbarProps {
 const Navbar: React.FunctionComponent<NavbarProps> = ({
   isLight,
   toggleTheme,
-}):ReactNode => {
+}): ReactElement => {
   const navigate = useNavigate();
   const theme = useTheme() as AppTheme;
 

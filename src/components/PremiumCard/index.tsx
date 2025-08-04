@@ -1,5 +1,5 @@
 import { RxCross2 } from "react-icons/rx";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 import {
   PremiumCardContainer,
@@ -10,9 +10,9 @@ import {
   GetButton,
 } from "./StyledComponents";
 
-import homeStore from "../../pages/Home/stores/homeStore";
+import homeStore from "../../stores/HomeStore";
 
-const PremiumCard: React.FunctionComponent = ():ReactNode => {
+const PremiumCard: React.FunctionComponent = (): ReactElement => {
   return (
     <PremiumCardContainer>
       <PremiumFlexContainer>
