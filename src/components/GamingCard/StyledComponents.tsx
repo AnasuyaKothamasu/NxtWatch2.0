@@ -12,7 +12,7 @@ export const GamingCardComponent = styled.div`
 `;
 
 export const GamingCardThumbnail = styled.img`
-  height: 350px;
+  height: 400px;
   width: 90%;
   @media (max-width: 400px) {
     width: 100%;

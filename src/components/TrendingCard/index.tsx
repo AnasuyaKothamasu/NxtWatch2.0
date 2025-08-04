@@ -7,6 +7,7 @@ import {
   TxtDivTrend,
   TrendingChannelProfile,
   TrendingCardTitle,
+  ImageDiv,
   TrendingChannelName,
 } from "./StyledComponents";
 
@@ -32,7 +33,9 @@ const TrendingCard: React.FunctionComponent<TrendVideoProps> = ({
   } = trendDetails;
   return (
     <TrendingCardComponent onClick={() => clickTrendVideo(id)}>
-      <TrendCardThumbnail src={thumbnail} />
+      <ImageDiv>
+        <TrendCardThumbnail src={thumbnail} />
+      </ImageDiv>
       <TrendingTextContainer>
         <TrendingChannelProfile src={channelProfile} />
         <TxtDivTrend>

@@ -19,7 +19,7 @@ class TrendStore {
 
   async fetchVideos() {
     const jwtToken = Cookies.get("jwt_token");
-    const url = "https://apis.ccbp.in/videos/all?search=";
+    const url = "https://apis.ccbp.in/videos/trending";
     const options = {
       method: "GET",
       headers: {

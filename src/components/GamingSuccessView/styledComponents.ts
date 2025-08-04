@@ -103,7 +103,7 @@ export const GamingGridContainer = styled.div`
   width: 100%;
   @media (max-width: 400px) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));  
   }
   @media (min-width: 400px) and (max-width: 575px) {
     display: grid;

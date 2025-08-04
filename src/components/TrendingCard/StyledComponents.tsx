@@ -16,25 +16,37 @@ export const TrendingCardComponent = styled.div`
   }
 `;
 
+export const ImageDiv = styled.div`
+  flex: 0 0 35%;
+  @media (max-width: 575px) {
+    flex: 0 0 45%;
+  }
+  @media (min-width: 576px) and (max-width: 767px) {
+    flex: 0 0 45%;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex: 0 0 45%;
+  }
+`;
+
 export const TrendCardThumbnail = styled.img`
-  height: 280px;
-  min-width: 40%;
+  height: auto;
+  width: 100%;
   @media (max-width: 575px) {
     width: 100%;
   }
   @media (min-width: 576px) and (max-width: 767px) {
     height: auto;
-    width: 55%;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     height: auto;
-    width: 55%;
   }
 `;
 
 export const TrendingTextContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex: 1;
 `;
 
 export const TrendingChannelProfile = styled.img`
@@ -54,30 +66,39 @@ export const TxtDivTrend = styled.div`
     padding: 5px 20px 5px 20px;
   }
   @media (min-width: 576px) and (max-width: 767px) {
-    padding: 5px 20px 5px 20px;
+    padding: 0 20px 0 20px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 5px 20px 5px 20px;
+    padding: 0 20px 0 20px;
   }
 `;
 
 export const TrendingCardTitle = styled.h2`
-  font-size: 22px;
+  font-size: 20px;
   margin: 10px 0px;
   color: #7a7878;
   color: ${(props) => props.theme.trendingCardTitle};
   @media (max-width: 575px) {
-    font-size: 18px;
+    font-size: 14px;
   }
   @media (min-width: 576px) and (max-width: 767px) {
     font-size: 16px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 20px;
+    font-size: 12px;
   }
 `;
 
 export const TrendingChannelName = styled.p`
   color: ${(props) => props.theme.descriptionColor};
   font-weight: 600;
+  @media (max-width: 575px) {
+    font-size: 12px;
+  }
+  @media (min-width: 576px) and (max-width: 767px) {
+    font-size: 12px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 12px;
+  }
 `;

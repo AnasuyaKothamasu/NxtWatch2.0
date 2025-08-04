@@ -17,7 +17,7 @@ import {
   FormLogo,
   ErrorMsg,
 } from "./styledComponents";
-import loginStore from "./stores/loginStore";
+import loginStore from "../../stores/LoginStore";
 
 import { AppTheme } from "../../types/types";
 import ROUTES from "../../constants/RouteConstants";

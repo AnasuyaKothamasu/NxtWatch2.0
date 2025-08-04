@@ -4,7 +4,6 @@ export const VideoCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  max-height: 360px;
   @media (min-width: 768px) and (max-width: 1023px) {
     min-width: 220px;
   }
@@ -19,19 +18,14 @@ export const VideoThumbnail = styled.img`
   margin-top: 20px;
   align-self: center;
   width: 90%;
-  height: 180px;
+  height: auto;
+  object-fit: cover;
   @media (max-width: 575px) {
     width: 100%;
   }
-  @media (min-width: 576px) and (max-width: 767px) {
-    height: 130px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    height: 130px;
-  }
 `;
 
-export const VideoCardFlexConatiner = styled.div`
+export const VideoCardFlexContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding: 20px;
@@ -62,7 +56,7 @@ export const VideoTitle = styled.h4`
   font-weight: 600;
   color: ${(props) => props.theme.descriptionColor};
   @media (min-width: 576px) and (max-width: 767px) {
-    font-size: 16px;
+    font-size: 12px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     font-size: 14px;

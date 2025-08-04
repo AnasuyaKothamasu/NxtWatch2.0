@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import {
   VideoCardContainer,
   VideoThumbnail,
-  VideoCardFlexConatiner,
+  VideoCardFlexContainer,
   VideoCardChannelProfile,
   TextContainerVideo,
   VideoTitle,
@@ -36,7 +36,7 @@ const VideoCard: React.FunctionComponent<VideoProps> = ({
     <>
       <VideoCardContainer onClick={() => handleClick(id)}>
         <VideoThumbnail src={thumbnailUrl} />
-        <VideoCardFlexConatiner>
+        <VideoCardFlexContainer>
           <VideoCardChannelProfile src={channelProfile} />
           <TextContainerVideo>
             <VideoTitle>{title}</VideoTitle>
@@ -45,7 +45,7 @@ const VideoCard: React.FunctionComponent<VideoProps> = ({
               {views} views • {publishedAt}
             </VideoDescription>
           </TextContainerVideo>
-        </VideoCardFlexConatiner>
+        </VideoCardFlexContainer>
       </VideoCardContainer>
     </>
   );

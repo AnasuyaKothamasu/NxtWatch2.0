@@ -1,6 +1,6 @@
-import { AppTheme } from "../types/types";
+import { DefaultTheme } from "styled-components";
 
-const LightTheme: AppTheme = {
+export const LightTheme: DefaultTheme = {
   isLight: true,
   primaryBgColor: "white",
   secondaryBgColor: "rgba(247, 246, 246, 0.904)",
@@ -32,7 +32,7 @@ const LightTheme: AppTheme = {
   themeIcon: "themeIcon-light",
 };
 
-const DarkTheme: AppTheme = {
+export const DarkTheme: DefaultTheme = {
   isLight: false,
   primaryBgColor: "rgb(37, 37, 37)",
   secondaryBgColor: "black",
@@ -64,4 +64,3 @@ const DarkTheme: AppTheme = {
   themeIcon: "themeIcon-dark",
 };
 
-export default { LightTheme, DarkTheme };

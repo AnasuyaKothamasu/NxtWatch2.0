@@ -1,20 +1,46 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router";
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
-import ViewItemDetails from "./pages/ViewItemDetails";
-import Trending from "./pages/Trending";
-import NotFound from "./pages/NotFound";
-import Gaming from "./pages/Gaming";
-import Saved from "./pages/Saved";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
+import ViewItemDetails from "./routes/ViewItemDetails";
+import Trending from "./routes/Trending";
+import NotFound from "./routes/NotFound";
+import Gaming from "./routes/Gaming";
+import Saved from "./routes/Saved";
+import Login from "./routes/Login";
+import Home from "./routes/Home";
 import "./App.css";
 
-import { LightTheme, DarkTheme } from "./constants/constants";
+import { LightTheme, DarkTheme } from "./constants/ThemeConstants";
 import Navbar from "./components/Navbar";
-import ROUTES from "./routes/route";
+import ROUTES from "./constants/RouteConstants";
 
+const AppComponent = ({
+  isLight,
+  toggleTheme,
+}: {
+  isLight: boolean;
+  toggleTheme: () => void;
+}) => {
+  const location = useLocation();
+
+  return (
+    <>
+      {location.pathname !=="/login" && (
+        <Navbar toggleTheme={toggleTheme} isLight={isLight} />
+      )}
+      <Routes>
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.TRENDING} element={<Trending />} />
+        <Route path={ROUTES.GAMING} element={<Gaming />} />
+        <Route path={ROUTES.SAVED} element={<Saved />} />
+        <Route path={ROUTES.VIEWITEMDETAILS} element={<ViewItemDetails />} />
+        <Route path={ROUTES.NOTFOUND} element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
 
 const App: React.FunctionComponent = () => {
   const [isLight, setIsLight] = useState<boolean>(true);
@@ -22,19 +48,10 @@ const App: React.FunctionComponent = () => {
   return (
     <ThemeProvider theme={isLight ? LightTheme : DarkTheme}>
       <BrowserRouter>
-        <Navbar
-          toggleTheme={() => setIsLight((prev) => !prev)}
+        <AppComponent
           isLight={isLight}
+          toggleTheme={() => setIsLight((prev) => !prev)}
         />
-        <Routes>
-          <Route path={ROUTES.LOGIN} element={<Login />} />
-          <Route path={ROUTES.HOME} element={<Home />} />
-          <Route path={ROUTES.TRENDING} element={<Trending />} />
-          <Route path={ROUTES.GAMING} element={<Gaming />} />
-          <Route path={ROUTES.SAVED} element={<Saved />} />
-          <Route path={ROUTES.VIEWITEMDETAILS} element={<ViewItemDetails />} />
-          <Route path={ROUTES.NOTFOUND} element={<NotFound />} />
-        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
