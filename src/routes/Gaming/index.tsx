@@ -27,7 +27,7 @@ const Gaming: React.FunctionComponent = observer((): ReactElement => {
     <>
       <GamingFlexContainer>
         <Sidebar />
-        {gameStore.showSuccessView ? <SuccessView /> : <FailureView />}
+        {gameStore.showSuccessView ? <SuccessView data-testid="gaming-success" /> : <FailureView data-testid="failure-view" />}
       </GamingFlexContainer>
     </>
   );

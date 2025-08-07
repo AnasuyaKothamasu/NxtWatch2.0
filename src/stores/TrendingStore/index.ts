@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 import TrendingVideo from "../models/TrendingCardModel";
 
-class TrendStore {
+export class TrendStore {
   showSuccessView = true;
   trendingVideos: TrendingVideo[] = [];
   isLoading = true;

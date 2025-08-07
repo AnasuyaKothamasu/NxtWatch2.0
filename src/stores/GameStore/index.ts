@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 import GamingVideo from "../models/GamingCardModel";
 
-class GameStore {
+export class GameStore {
   showSuccessView = true;
   gamingVideos: GamingVideo[] = [];
   isLoading = true;
